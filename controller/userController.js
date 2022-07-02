@@ -50,3 +50,15 @@ exports.logout = bigPromise(async (req, res, next) => {
       message: "Logout Success",
     });
 });
+
+exports.emailVerify = bigPromise(async (req, res, next) => {
+  const token = req.params.token;
+
+  const user = await User.findOne({ email_token: token });
+  if (!user) {
+    return next(new customError("Invalid Token", 400));
+  }
+  user.email_verified = true;
+  user.email_token = null;
+  await user.save();
+});

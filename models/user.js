@@ -16,6 +16,11 @@ const userSchema = mongoose.Schema({
     validate: [validator.isEmail, "Please enter email in proper format"],
     unique: true,
   },
+  email_token: {
+    type: String,
+    default: crypto.randomBytes(16).toString("hex"),
+    unique: true,
+  },
   email_verified: {
     type: Boolean,
     default: false,
