@@ -28,7 +28,8 @@ app.use(function (req, res, next) {
 });
 
 const user = require("./routes/user");
+const bankAccount = require("./routes/bankAccount");
 
-app.use("/api/v1", user);
+app.use("/api/v1", user, bankAccount);
 
 module.exports = app;
