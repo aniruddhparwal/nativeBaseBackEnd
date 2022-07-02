@@ -3,6 +3,7 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const sendEmail = require("../utils/email");
 
 const userSchema = mongoose.Schema({
   name: {
@@ -60,6 +61,9 @@ userSchema.pre("save", async function (next) {
     return next();
   }
   this.password = await bcrypt.hash(this.password, 10);
+
+  sendEmail(this.email, this.email_token);
+
   // return next();
 });
 
