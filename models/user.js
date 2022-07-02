@@ -61,7 +61,11 @@ userSchema.pre("save", async function (next) {
 //validate password with passed passwords
 userSchema.methods.isValidatedPassword = async function (userSendPassword) {
   let re = await bcrypt.compare(userSendPassword, this.password);
-  if (re) this.LastLoginAt = Date.now();
+  if (re) {
+    this.LastLoginAt = Date.now();
+    await this.save();
+  }
+
   return re;
 };
 
