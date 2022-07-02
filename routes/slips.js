@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
 
-const { newSlip } = require("../controller/slipsController");
+const { createSlip, getSlips } = require("../controller/slipsController");
 
-router.route("/newSlip").post(auth, newSlip);
+router.route("/createSlip").post(auth, createSlip);
+router.route("/getSlips").get(auth, getSlips);
 
 module.exports = router;

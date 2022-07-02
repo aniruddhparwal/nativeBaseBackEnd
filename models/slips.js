@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const slipsSchema = mongoose.Schema({
   slipUserId: {
     type: String,
-    required: [true, "Please Provide Name"],
+    required: [true, "Id is required"],
   },
   slipStatus: {
     type: Number,
@@ -11,7 +11,7 @@ const slipsSchema = mongoose.Schema({
   },
   amount: {
     type: Number,
-    required: [true, "Please Provide Mobile Number"],
+    required: [true, "Please Amount"],
   },
   createdAt: {
     type: Date,
@@ -19,16 +19,18 @@ const slipsSchema = mongoose.Schema({
   },
   slipData: {
     type: Object,
+    required: [true, "Please provide slip data"],
   },
   bankAccountId: {
     type: String,
+    required: [true, "Please provide bank account id"],
   },
   slipDuration: {
     type: Number,
     default: 7,
   },
   slipExpiryDate: {
-    type: Date,
+    type: Date
   },
 });
 slipsSchema.pre("save", async function (next) {
