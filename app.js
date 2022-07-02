@@ -29,8 +29,10 @@ app.use(function (req, res, next) {
 
 const user = require("./routes/user");
 const slips = require("./routes/slips");
+const bankAccount = require("./routes/bankAccount");
 
 app.use("/api/v1", user);
 app.use("/api/v1", slips);
+app.use("/api/v1", bankAccount);
 
 module.exports = app;
