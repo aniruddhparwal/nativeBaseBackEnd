@@ -35,26 +35,15 @@ exports.addBankAccount = bigPromise(async (req, res, next) => {
     mobileNo,
   });
   res.status(200).json({ success: true, data: bankAccount });
-  // bankAccount.save()
-  // .then(bankAccount => {
-  //     res.json({ message: "Bank Account Added" })
-  // })
-  // .catch(err => {
-  //     console.log(err)
-  // })
 });
 
 exports.getBankAccount = bigPromise(async (req, res, next) => {
-  BankAccount.find({ userId: req.user.id }, function (err, result) {
-    if (err) throw err;
-    if (result) {
-      res.json(result);
-    } else {
-      res.send(
-        JSON.stringify({
-          error: "Error",
-        })
-      );
-    }
-  });
+  var id = req.user.id;
+  const bankAccount = await BankAccount.find({ userId: id });
+  if(bankAccount){
+    res.json(bankAccount);
+  }
+  else{
+    return next(new customError("Invalid Token", 400));
+  }
 });
