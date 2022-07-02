@@ -17,6 +17,12 @@ const slipsSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  slipData: {
+    type: Object,
+  },
+  bankAccountId: {
+    type: String,
+  },
   slipDuration: {
     type: Number,
     default: 7,
